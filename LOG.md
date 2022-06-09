@@ -61,3 +61,63 @@
 ```shell
 npm install @alan-ai/alan-sdk-web @mui/icons-material @mui/material @emotion/react @emotion/styled @reduxjs/toolkit axios react-redux react-router-dom
 ```
+
+## Pages and Routing
+
+- create `Movies.js` in `src/pages/Movies`
+- create `MovieInformation.js` in `src/pages/MovieInformation`
+- create `Actors.js` in `src/pages/Actors`
+- create `Profile.js` in `src/pages/Profile`
+- create `Error.js` in `src/pages/Error`
+
+- create `index.js` in `src/pages`
+
+  ```jsx
+  import Movies from "./Movies/Movies";
+  import MovieInformation from "./MovieInformation/MovieInformation";
+  import Actors from "./Actors/Actors";
+  import Profile from "./Profile/Profile";
+  import Error from "./Error/Error";
+
+  export { Movies, MovieInformation, Actors, Profile, Error };
+  ```
+
+- create `NavBar.js` in `src/components/NavBar`
+- create `index.js` in `src/components`
+
+  ```jsx
+  import NavBar from "./NavBar/NavBar";
+
+  export { NavBar };
+  ```
+
+- setup page routing in `src/App.js`
+
+  ```jsx
+  import { BrowserRouter, Routes, Route } from "react-router-dom";
+  import { CssBaseline } from "@mui/material";
+  import { Movies, MovieInformation, Actors, Profile, Error } from "./pages";
+  import { NavBar } from "./components";
+
+  function App() {
+    return (
+      <BrowserRouter>
+        <div>
+          <CssBaseline />
+          <NavBar />
+          <main>
+            <Routes>
+              <Route path="/" element={<Movies />} />
+              <Route path="/movie/:id" element={<MovieInformation />} />
+              <Route path="/actors/:id" element={<Actors />} />
+              <Route path="/profile/:id" element={<Profile />} />
+              <Route path="*" element={<Error />} />
+            </Routes>
+          </main>
+        </div>
+      </BrowserRouter>
+    );
+  }
+
+  export default App;
+  ```
